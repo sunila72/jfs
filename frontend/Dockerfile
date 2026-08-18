@@ -1,9 +1,16 @@
-FROM node:21-alpine AS frontend
+FROM node:22-alpine AS frontend
+
 WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
 COPY . .
-RUN npm install
 RUN npm run build
 
+
 FROM nginx:alpine
+
 COPY --from=frontend /app/build /usr/share/nginx/html
+
 EXPOSE 80
