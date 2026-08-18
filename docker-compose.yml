@@ -24,6 +24,8 @@ services:
   backend:
     image: lucix4/deploy:backend${BUILD_ID}
     container_name: backend
+    ports:
+    - "9090:8080"
     expose:
       - "8080"
     networks:
